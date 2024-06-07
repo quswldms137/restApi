@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>main (<span th:text="${session.name}">[name]</span>)</h2>
+<hr>
+<a href="loginForm">로그인</a>
+<a href="logout">로그아웃</a>
+</body>
+</html>

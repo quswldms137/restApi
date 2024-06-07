@@ -1,0 +1,12 @@
+package com.example.restapi.entity;
+
+import jakarta.persistence.Entity;
+import lombok.Data;
+
+@Entity
+@Data
+public class Member {
+	private String name;
+	private String email;
+	private String addr;
+}

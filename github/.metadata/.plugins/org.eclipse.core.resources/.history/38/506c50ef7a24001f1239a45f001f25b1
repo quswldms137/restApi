@@ -1,0 +1,11 @@
+package com.example.restServer.dto;
+
+import com.example.restServer.entity.Member;
+
+public class BoardDto {
+	private Integer bno;
+	private String title;
+	private String content;
+	private String writer;
+	
+}

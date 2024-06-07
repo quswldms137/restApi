@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>기사작성폼</h2>
+<hr>
+<form id="articleWriteForm">
+	<input type="text" name="title" placeholder="기사제목"><br>
+	<input type="text" name="content" placeholder="기사내용"><br>
+	<input type="text" name="writer" th:value="${session.name}" readonly><br>
+	<input type="button" onclick="postArticle()">기사등록</button>
+</form>
+<div id="result_reg"></div>
+
+<script>
+	//POST : <등록>
+	function postArticle(){
+	//입력 양식에 적힌 데이터 가져오기
+	const title_ = document.querySelector("input[name='title']");
+	const content_ = document.querySelector("input[name='content']");
+	const writer_ = document.querySelector("input[name='writer']");
+	
+	//가져온 입력데이터를 객체로 만들기 --> JSON으로 변경하여 서버에 전송하기위해서
+	const article = {
+			title : title_.value,
+			content : content_.value,
+			writer : writer_.value
+	}
+	
+	//객체를 JSON으로 변경하기
+	const sendData = JSON.stringify(article);
+	
+	const xhttp = new XMLHttpRequest();
+	xhttp.onload = function(){  //서버가 등록처리 후 결과 데이터를 보내주면 responserText로 받는다 
+		document.getElementById("result_reg").innerHTML = this.responseText;
+	}
+	xhttp.open("POST", "/news/article");
+	xhttp.setRequestHeader("Content-Type", "application/json");
+	xhttp.send(sendData); 
+	}
+	
+	
+	
+	$(document).ready(function() {
+		//기사작성 : POST
+		$("#articleWriteForm").on("submit", function(e){
+			e.preventDefault();
+			
+			var articleWriteForm = $(this).serialize();
+			$.ajax({
+				url: "/news/article",
+				type: "POST",
+				data: articleWriteForm,
+				success: function(response){
+					document.getElementById("result_reg").innerHTML = response;
+					consol.log(response);
+				},
+				error: function(xhr, status, error) {
+					console.error(xhr.responseText); // 에러 발생 시 콘솔에 에러 메시지 표시
+				}
+			});
+			
+			
+		});
+	
+		
+		
+	}); 
+	
+</script>
+</body>
+</html>

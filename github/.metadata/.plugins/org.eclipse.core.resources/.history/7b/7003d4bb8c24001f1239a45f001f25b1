@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>boardList</h2>
+<hr>
+<div>
+<table>
+<thead>
+	<tr>
+		<th>bno</th>
+		<th>title</th>
+		<th>content</th>
+		<th>writer</th>
+		<th>originName</th>
+		<th>image</th>
+	</tr>
+</thead>
+<tbody>
+	<tr th:each="board : ${boardList}">
+		<td>[[${board.bno}]]</td>
+		<td>[[${board.title}]]</td>
+		<td>[[${board.content}]]</td>
+		<td>[[${board.member.username}]]</td>
+		<td>[[${board.originName}]]</td>
+		<td>image</td>
+	</tr>
+</tbody>	
+</table>
+</div>
+</body>
+</html>

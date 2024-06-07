@@ -1,0 +1,38 @@
+package com.example.restServer.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.restServer.repository.BoardRepository;
+import com.example.restServer.repository.MemberRepository;
+
+@Controller
+public class MainController {
+	@Autowired
+	private MemberRepository memberRepository;
+	@Autowired
+	private BoardRepository boardRepository;
+	
+	@RequestMapping("/")
+	public String root() {
+		System.out.println("root-----");
+		return "index";
+	}
+	
+	@RequestMapping("/join")
+	public String join() {
+		return "joinForm";
+	}
+	
+	@RequestMapping("/joinProc")
+	public @ResponseBody String joinProc() { //(파라미터 설정)
+		
+		//DB에 저장
+		
+		return "등록성공";
+	}
+}

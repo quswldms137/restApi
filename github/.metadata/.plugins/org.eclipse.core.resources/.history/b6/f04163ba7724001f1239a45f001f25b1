@@ -1,0 +1,19 @@
+package com.example.restServer.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.restServer.repository.BoardRepository;
+
+@Controller
+@RequestMapping("/member")
+public class MemberController {
+	//@Autowired
+	private BoardRepository boardRepository;
+	
+	//생성자주입 <- (@Autowired 사용안한다면)
+	public MemberController(BoardRepository boardRepository) {
+		this.boardRepository = boardRepository;
+	}
+}

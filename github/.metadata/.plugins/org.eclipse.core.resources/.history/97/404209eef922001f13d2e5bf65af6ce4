@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>기사작성폼</h2>
+<hr>
+<form action="articleWrite" method="post">
+	<input type="text" name="title" placeholder="기사제목"><br>
+	<input type="text" name="content" placeholder="기사내용"><br>
+	<input type="text" name="writer" th:value="${session.name}" readonly><br>
+	<input type="submit" value="기사등록">
+</form>
+</body>
+</html>

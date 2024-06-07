@@ -1,0 +1,8 @@
+package com.example.viewServer.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class MemberController {
+	
+}

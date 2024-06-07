@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>join Form(회원가입 폼)</h2>
+<hr>
+	<form action="/joinProc" method="POST">
+		<input type="text" name="username" placeholder="username"><br>
+		<input type="password" name="password" placeholder="password"><br>
+		<input type="text" name="name" placeholder="name"><br>
+		<input type="submit" value="회원등록">
+	</form>
+</body>
+</html>

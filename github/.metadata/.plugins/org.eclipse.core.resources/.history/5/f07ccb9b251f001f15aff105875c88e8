@@ -1,0 +1,12 @@
+package com.example.shop.dto;
+
+import lombok.Data;
+
+@Data
+public class OrderProductDto {
+	private Long ono;
+	private int orderquantity;
+	private Long pno;
+	private String pname;
+	private int price;
+}

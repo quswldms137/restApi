@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>board Detail</h2>
+<hr>
+<ul>
+	<li>[[${board.bno}]]</li>
+	<li>[[${board.title}]]</li>
+	<li>[[${board.content}]]</li>
+	<li>[[${board.member.username}]]</li>
+	<li>[[${board}]]</li>
+</ul>
+</body>
+</html>

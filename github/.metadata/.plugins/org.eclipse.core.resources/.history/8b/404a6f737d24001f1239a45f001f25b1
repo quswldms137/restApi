@@ -1,0 +1,45 @@
+package com.example.restServer.controller;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.restServer.dto.BoardDto;
+import com.example.restServer.repository.BoardRepository;
+
+@Controller
+@RequestMapping("/member")
+public class MemberController {
+	@Value("${spring.servlet.multipart.location}")
+	private String uploadPath; //저장되는 경로 
+	
+	//@Autowired
+	private BoardRepository boardRepository;
+	
+	//생성자주입 <- (@Autowired 사용안한다면)
+	public MemberController(BoardRepository boardRepository) {
+		this.boardRepository = boardRepository;
+	}
+	
+	//로그인이 끝난 상태 => 서비스를 이용하는 단계(멤버메인페이지) - 서비스 = 게시물을 보거나 게시물을 등록하는 것 
+	@GetMapping("/main")
+	public String main() {
+		return "member/main";
+	}
+	//게시물 등록(등록폼, 등록처리) 
+	@GetMapping("/regBoard")
+	public String regBoard() {
+		return "regBoardForm";
+	}
+	
+	@PostMapping("/regBoardProc")
+	public @ResponseBody String regBoardPorc(BoardDto boardDto) { //(파라미터 처리)
+		
+		return "등록성공";
+	}
+	
+	//게시물 조회
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<h2>메모저장하기</h2>
+<form id="regForm">
+	<input type="text" name="title" placeholder="title"><br>
+	<input type="text" name="content" placeholder="content"><br>
+	<input type="text" name="writer" placeholder="writer"><br>
+	<button type="submit">Memo 저장하기</button>
+</form>	
+
+<hr>
+<h2>메모조회하기</h2>
+<form id="getForm">
+	<input type="text" name="mno" placeholder="mno"><br>
+	<button type="submit">Memo 조회하기</button>
+</form>
+
+<div id="result_get"></div>
+
+
+<script>
+	
+	$(document).ready(function() {
+		//POST : <등록>
+		$("#regForm").on("submit", function(e) {
+			e.preventDefault(); //폼의 기본 제출을 방지
+			
+			//폼 데이터를 객체로 직렬화
+			var regFormData = $(this).serialize();
+			
+			$.ajax({
+				url: "/memoapp/memo",
+				type: "POST",
+				data: regFormData,
+				success: function(response){
+					console.log("Success:", response);  
+				},
+				error: function(xhr, status, error) {
+					console.log("XMLHttpRequest 객체:", xhr);
+					console.log("Status:", status);
+					console.log("Error:", error);
+					
+					if(xhr.status === 404){
+						console.log("리소스가 없어요(주소 올바르게 쓰기!)");
+					}else if(xhr.status ===500){
+						console.log("문제 발생, 메세지 확인하기");
+					}else{
+						console.log("다른 알려지지 않은 문제가 발생한 듯");
+					}
+				}	
+			});
+		});
+		//GET : <조회>
+		$("#getForm").on("submit", function(e){
+			e.preventDefault();
+			
+			var getFormData = $(this).serialize();
+			
+			$.ajax({
+				url: "memoapp/memo",
+				type: "GET",
+				data: getFormData,
+				success: function(response){
+					document.getElementById("result_get").innerHTML = response;
+					console.log("Success:", response);
+				},
+				error: function(xhr, status, error) {
+					console.log("XMLHttpRequest 객체:", xhr);
+					console.log("Status:", status);
+					console.log("Error:", error);
+					
+					if(xhr.status === 404){
+						console.log("리소스가 없어요(주소 올바르게 쓰기!)");
+					}else if(xhr.status ===500){
+						console.log("문제 발생, 메세지 확인하기");
+					}else{
+						console.log("다른 알려지지 않은 문제가 발생한 듯");
+					}
+				}	
+			});
+		});
+		
+	});
+
+</script>
+</body>
+</html>

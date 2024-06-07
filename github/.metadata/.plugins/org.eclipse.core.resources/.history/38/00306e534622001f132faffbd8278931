@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<h2>메모저장하기</h2>
+<input type="text" name="title" placeholder="title"><br>
+<input type="text" name="content" placeholder="content"><br>
+<input type="text" name="writer" placeholder="writer"><br>
+<button onclick="postMemo()">Memo 저장하기</button>
+<div id="result_save"></div>
+
+<script>
+	//POST : <등록>
+	
+
+</script>
+</body>
+</html>

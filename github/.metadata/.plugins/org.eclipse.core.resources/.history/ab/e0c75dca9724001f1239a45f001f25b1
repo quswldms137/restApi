@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<h2>join Form(회원가입 폼)</h2>
+<hr>
+<div>
+	<form name="frm">
+		<input type="text" name="username" placeholder="username"><br>
+		<input type="password" name="password" placeholder="password"><br>
+		<input type="text" name="name" placeholder="name"><br>
+		<input type="submit" value="회원등록" onclick="submitForm(event)">
+	</form>
+</div>
+<div id="demo"></div>
+<script>
+	function submitForm(event){
+		envet.preventDefault();
+		alert("submit---");
+		
+		var form = document.forms['frm'];
+		var formData = $(form).serialize();
+		
+		
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:9001/joinProc",
+			contentType:"application/x-www-form-urlencoded",
+			data: formData,
+			dataType: "text",    <!-- 서버가 보내주는 데이터의 타입, -->
+			success: function(data){
+				console.log(data);
+				$("#demo").html(data);
+			},
+			error: function(){
+				console.log("에러발생");
+			}
+		});
+	}
+</script>
+</body>
+</html>

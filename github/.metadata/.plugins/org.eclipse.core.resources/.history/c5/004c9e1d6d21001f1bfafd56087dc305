@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>index</h1>
+	<hr>
+	<button id="get" onclick="getData()">Get 요청(파라미터x)</button>
+	<div id="demo_get"></div>
+	
+	<button id="get" onclick="getData2()">Get 요청2(파라미터o)</button>
+	<div id="demo_get2"></div>
+	
+	<button id="get" onclick="getData3()">Get 요청3(파라미터o - MemberDto(name,email,addr))</button>
+	<div id="demo_get3"></div>
+	
+	<hr>
+	
+	<button id="post" onclick="postData()">Post 요청(form)</button>
+	<div id="demo_post"></div>
+	
+	<button id="post" onclick="postData2()">Post 요청(Json)</button>
+	<div id="demo_post2"></div>
+	
+	<script>
+		function getData() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function(){
+				document.getElementById("demo_get").innerHTML = this.responseText;
+			}
+			xhttp.open("GET", "api/v1/get-api/hello");
+			xhttp.send();
+		}
+		
+		function getData2() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function(){
+				document.getElementById("demo_get2").innerHTML = this.responseText;
+			}
+			xhttp.open("GET", "/api/v1/get-api/variable1/123");
+			xhttp.send();
+		}
+		
+		function getData3() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function(){
+				document.getElementById("demo_get3").innerHTML = this.responseText;
+			}
+			xhttp.open("GET", "/api/v1/get-api/request3?name=임꺽정&email=igj@naver.com&addr=부산");
+			xhttp.send();
+		}
+		//POST
+		function postData() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function(){
+				document.getElementById("demo_post").innerHTML = this.responseText;
+			}
+			xhttp.open("POST", "/api/v1/post-api/member0");
+			xhttp.setRequestHEADER("Content-Type", "application/x-www-form-urlencoded");
+			xhttp.send("name=임꺽정&email=igj@naver.com&addr=부산");
+		}
+		
+		function postData2() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function(){
+				document.getElementById("demo_post2").innerHTML = this.responseText;
+			}
+			xhttp.open("POST", "/api/v1/post-api/member2");
+			xhttp.setRequestHEADER("Content-Type", "application/json");
+			xhttp.send('{"name" : "James", "email" : "j@naver.com", "addr" : "seoul"}');
+		}
+	</script>
+</body>
+</html>

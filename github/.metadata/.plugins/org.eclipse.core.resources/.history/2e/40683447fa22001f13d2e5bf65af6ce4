@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>기사작성폼</h2>
+<hr>
+<form action="articleWriteForm">
+	<input type="text" name="title" placeholder="기사제목"><br>
+	<input type="text" name="content" placeholder="기사내용"><br>
+	<input type="text" name="writer" th:value="${session.name}" readonly><br>
+	<input type="submit" value="기사등록">
+</form>
+<div id="result_reg"></div>
+
+<script>
+	//기사작성 : POST
+	$(document).ready(function() {
+		$("#articleWriteForm").on("submit", function(e){
+			e.preventDefault();
+			
+			var articleWriteForm = $(this).serialize();
+			$.ajax({
+				url: "/news/article",
+				type: "POST",
+				data: articleWriteForm,
+				success: function(response){
+					document.getElementById("result_reg").innerHTML = response;
+					console.log("Success:", response);  
+				},
+			});
+			
+			
+		});
+	
+		
+		
+	});
+</script>
+</body>
+</html>

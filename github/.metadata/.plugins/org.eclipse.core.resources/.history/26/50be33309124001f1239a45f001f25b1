@@ -1,0 +1,5 @@
+package com.example.viewServer.controller;
+
+public class LoginController {
+
+}

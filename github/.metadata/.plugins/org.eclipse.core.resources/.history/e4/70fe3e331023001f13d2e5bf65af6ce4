@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h2>기사작성폼</h2>
+<hr>
+<form id="articleWriteForm">
+	<input type="text" name="title" placeholder="기사제목"><br>
+	<input type="text" name="content" placeholder="기사내용"><br>
+	<input type="text" name="writer" th:value="${session.name}" readonly><br>
+	<input type="button" onclick="postArticle()" value="기사등록">
+</form>
+<div id="result_reg"></div>
+
+  <script>
+        function postArticle() {
+            var formData = {
+                title: $('input[name="title"]').val(),
+                content: $('input[name="content"]').val(),
+                writer: $('input[name="writer"]').val()
+            };
+
+            $.ajax({
+                url: "/news/article",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    $('#result_reg').html("기사 등록 성공: " + JSON.stringify(response));
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    $('#result_reg').html("기사 등록 실패: " + xhr.responseText);
+                    console.error(xhr.responseText); // 에러 발생 시 콘솔에 에러 메시지 표시
+                }
+            });
+        }
+    </script>
+</body>
+</html>

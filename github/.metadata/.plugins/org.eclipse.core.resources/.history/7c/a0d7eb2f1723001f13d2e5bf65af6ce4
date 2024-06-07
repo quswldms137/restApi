@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>main (<a href="mypage"><span th:text="${session.name}">[name]</span></a>)</h2>
+<hr>
+<span th:unless="${session.name}">
+	<a href="loginForm">로그인</a>
+</span>
+<span th:if="${session.name}">
+	<a href="logout">로그아웃</a>
+	<a href="articlewriteForm">기사작성</a>
+</span>
+</body>
+</html>

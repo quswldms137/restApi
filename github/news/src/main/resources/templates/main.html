@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>main (<a href="mypage"><span th:text="${session.name}">[name]</span></a>)</h2>
+<hr>
+<span th:unless="${session.name}">
+	<a href="loginForm">로그인</a>
+</span>
+<span th:if="${session.name}">
+	<a href="logout">로그아웃</a>
+	<a href="articlewriteForm">기사작성</a>
+</span>
+<div id="a-article">
+	
+</div>
+
+
+
+<script>
+$(document).ready(function() {
+    // 서버로부터 승인된 기사 목록을 가져오기 위한 AJAX 호출
+    $.ajax({
+        url: '/approvedArticles', // 서버에서 승인된 기사를 제공하는 API 엔드포인트
+        type: 'GET',
+        success: function(data) {
+            var articles = JSON.parse(data); // 서버로부터 받은 데이터를 JSON으로 파싱
+            if (articles.length > 0) {
+                $.each(articles, function(index, article) {
+                    // 각 기사를 div에 추가
+                    $('#a-article').append(
+                        '<div class="article">' +
+                        '<h3>' + article.title + '</h3>' +
+                        '<p>' + article.content + '</p>' +
+                        '<p>작성자: ' + article.writer + '</p>' +
+                        '</div>'
+                    );
+                });
+            } else {
+                $('#a-article').append('<p>승인된 기사가 없습니다.</p>');
+            }
+        },
+        error: function(error) {
+            console.log("Error: ", error);
+            $('#a-article').append('<p>기사를 불러오는 중 오류가 발생했습니다.</p>');
+        }
+    });
+});
+</script>
+</body>
+</html>

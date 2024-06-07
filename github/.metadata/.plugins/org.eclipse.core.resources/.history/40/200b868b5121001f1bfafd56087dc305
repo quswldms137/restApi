@@ -1,0 +1,45 @@
+package com.example.restapi.controller;
+
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.restapi.dto.MemberDto;
+
+@RestController
+@RequestMapping("/api/v1/post-api")
+public class PostController {
+	//http://localhost:8085/api/v1/post-api/domain
+	//@RequestMapping(value = "/domain", method=RequestMethod.POST)
+	@PostMapping("/domain")
+	public String postExample() {
+		return "hello postapi";
+	}
+	
+	//Content-Type : application/json
+	//http://localhost:8085/api/v1/post-api/member
+	@PostMapping("/member")
+	public String postMember(@RequestBody Map<String, Object> postData) {
+		StringBuilder sb = new StringBuilder();
+		postData.entrySet().forEach(map -> {
+			sb.append(map.getKey() + " : " + map.getValue() + "\n");
+		});
+		
+		return sb.toString();
+	}
+	
+	//http://localhost:8085/api/v1/post-api/member2
+	@PostMapping("/member2")
+	public String postMemberDto(@RequestBody MemberDto memberDto) {
+		return memberDto.toString();
+	}
+	
+	//http://localhost:8085/api/v1/post-api/member2
+	@PostMapping("/member3")
+	public MemberDto postMemberDto2(@RequestBody MemberDto memberDto) {
+		return memberDto;
+	}
+}

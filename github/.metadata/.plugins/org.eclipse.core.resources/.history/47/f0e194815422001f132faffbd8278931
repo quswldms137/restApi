@@ -1,0 +1,12 @@
+package com.example.restapiex.entity;
+
+import jakarta.persistence.Entity;
+import lombok.Data;
+
+@Entity
+@Data
+public class Member {
+	
+	private String username;
+	private String password;
+}

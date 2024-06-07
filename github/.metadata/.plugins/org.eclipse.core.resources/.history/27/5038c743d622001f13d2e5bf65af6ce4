@@ -1,0 +1,9 @@
+package com.example.restapiex.controller;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Dash {
+	private int c1;
+	private int c2;
+}

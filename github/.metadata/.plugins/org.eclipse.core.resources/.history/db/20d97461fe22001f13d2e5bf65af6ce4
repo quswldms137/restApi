@@ -1,0 +1,30 @@
+package com.example.news.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.news.entity.Member;
+import com.example.news.entity.Newspaper;
+import com.example.news.repository.NewspaperRepository;
+
+@RestController
+@RequestMapping("/news")
+public class NewsController {
+	@Autowired
+	NewspaperRepository newspaperRepository;
+	
+	//기사작성 post
+	@PostMapping("/article")
+	public Newspaper articleWrite(@RequestParam("title") String title, @RequestParam("content") String content, 
+			@RequestParam("writer") Member writer) {
+		Newspaper news = new Newspaper();
+		news.setTitle(title);
+		news.setContent(content);
+		news.setWriter(writer);
+		Newspaper result = newspaperRepository.save(news);
+		return result;
+	}
+}

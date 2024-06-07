@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>기자관리페이지</h2>
+<hr>
+<a href="articlewriteForm">기사등록</a>
+<div th:each="news : ${news}">
+    <table border="1">
+    	<tr>
+    		<th>번호</th>
+    		<th>제목</th>
+    		<th>내용</th>
+    		<th>작성자</th>
+    	</tr>
+    	<tr>
+    		<td th:text="${news.pno}"></td>
+    		<td th:text="${news.title}"></td>
+    		<td th:text="${news.content}"></td>
+    		<td th:text="${news.writer.name}"></td>
+    	</tr>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+package com.example.restapi.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/get-api")
+public class GetController {
+	//매개변수 x
+	//http://localhost:8085/api/v1/get-api/hello
+	@GetMapping("/hello")
+	public String getHello() {
+		return "hello restapi";
+	}
+	
+	//http://localhost:8085/api/v1/get-api/name
+	@GetMapping("/name")
+	public String getName() {
+		return "HongGilDong";
+	}
+	
+	//매개변수 o
+	@GetMapping("/variable1/{variable}")
+	public String getVariable1(@PathVariable String variable) {
+		return variable;
+	}
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- 폰트 첨부 -->
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        .cont{
+            width:500px;
+            margin:24px auto;
+        }
+        input{
+            width:300px;
+            height:40px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- <th:block th:insert="~{/sub/header.html}"></th:block> -->
+    </header>
+    <section>
+        <h1> Index Page </h1>
+        <hr>
+        <div class="cont">
+            <h2> Content </h2>
+            <input type="text" id="input_name" value="name">
+            <input type="text" id="input_email" value="email">
+            <input type="text" id="input_addr" value="address">
+
+            <p id="name"></p>
+            <p id="email"></p>
+            <p id="addr"></p>
+        </div>
+    </section>
+    <footer>
+
+    </footer>
+
+    <script>
+
+        function reloadContent() {
+            const input_name = document.getElementById('input_name').value;
+            const input_email = document.getElementById('input_email').value;
+            const input_addr = document.getElementById('input_addr').value;
+            fetch('/api/v1/get-api/request3?name='+input_name+'&email='+input_email+'&addr='+input_addr)
+                .then(response => response.json())
+                .then(data => {
+                    const name = document.getElementById('name');
+                    const email = document.getElementById('email');
+                    const addr = document.getElementById('addr');
+                    name.innerHTML = '이름 : ' + data.name;
+                    email.innerHTML = '이메일 : ' + data.email;
+                    addr.innerHTML = '주소 : ' + data.addr;
+                })
+
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            setInterval(reloadContent, 800); // x/1000 초 마다 함수 실행
+        });
+    </script>
+</body>
+
+</html>

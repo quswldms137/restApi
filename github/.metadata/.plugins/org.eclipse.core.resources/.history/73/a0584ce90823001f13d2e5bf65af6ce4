@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>기자관리페이지</h2>
+<hr>
+<div th:each="news : ${news}">
+    <p th:text="${news.pno}"></p>
+    <p th:text="${news.title}"></p>
+    <p th:text="${news.content}"></p>
+    <p th:text="${news.writer}"></p>
+</div>
+</body>
+</html>

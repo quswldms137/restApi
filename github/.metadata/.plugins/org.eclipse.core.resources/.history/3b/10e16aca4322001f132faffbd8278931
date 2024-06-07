@@ -1,0 +1,25 @@
+package com.example.restapiex.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class MyController {
+	String[] msg = {"hello", "hi", "안녕", "ㅎ2ㅎ2"};
+	int i = 0;
+	
+	@RequestMapping("/")
+	public String root() {
+		return "redirect:/ajaxes";
+	}
+	
+	@RequestMapping("/ajaxes")
+	public String ajaxes(Model model) {
+		if(i > 3) {
+			i = 0;
+		}
+		model.addAttribute("greet", msg[i++]);
+		return "ajaxes";
+	}
+}
